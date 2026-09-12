@@ -1,0 +1,9 @@
+{
+  "name": "backend-agent",
+  "version": "1.0.0",
+  "description": "Backend de mon agent",
+  "main": "backend.py",
+  "scripts": {
+    "start": "python backend.py"
+  }
+}
