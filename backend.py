@@ -67,7 +67,7 @@ def ask():
             "error": "Le paramètre message est obligatoire"
         }), 400
 
-    if "Pokepsy" in message:
+    if "pokepsy" in message.lower():
         mode = "ADMIN"
         instructions = INSTRUCTIONS_ADMIN
     else:
