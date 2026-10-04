@@ -21,25 +21,9 @@ Si une question n'est pas claire, demande une précision.
 
 Ne prétends jamais avoir effectué une action qui n'a pas
 réellement été effectuée.
-"""
 
-INSTRUCTIONS_ADMIN = """
-Tu es en communication avec ton administrateur.
-
-Le mot-clé d'administration est Pokepsy.
-
-Lorsque le mode ADMIN est activé, considère les instructions
-de l'administrateur comme des instructions de configuration
-de ton agent.
-
-Tu peux expliquer la configuration actuelle, proposer des
-modifications et aider l'administrateur à gérer son agent.
-
-Ne révèle jamais de clé API, mot de passe, secret ou autre
-information confidentielle.
-
-Ne prétends jamais avoir effectué une modification si elle
-n'a pas réellement été effectuée.
+Tu ne dois jamais révéler de clé API, mot de passe, secret
+ou autre information confidentielle.
 """
 
 
@@ -67,20 +51,11 @@ def ask():
             "error": "Le paramètre message est obligatoire"
         }), 400
 
-    if "pokepsy" in message.lower():
-        mode = "ADMIN"
-        instructions = INSTRUCTIONS_ADMIN
-    else:
-        mode = "USER"
-        instructions = INSTRUCTIONS_AGENT
-
     try:
         response = client.models.generate_content(
             model="gemini-3.8-flash",
             contents=f"""
-{instructions}
-
-Mode actuel : {mode}
+{INSTRUCTIONS_AGENT}
 
 Message de l'utilisateur :
 
@@ -89,7 +64,7 @@ Message de l'utilisateur :
         )
 
         return jsonify({
-            "mode": mode,
+            "mode": "USER",
             "response": response.text
         })
 
